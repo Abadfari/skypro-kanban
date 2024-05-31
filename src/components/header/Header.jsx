@@ -1,6 +1,6 @@
 import Nav from "../nav/Nav";
 
-const Header = () => {
+const Header = ({ addTask }) => {
   return (
     <header className="header">
       <div className="container">
@@ -15,7 +15,7 @@ const Header = () => {
               <img src="images/logo_dark.png" alt="logo"></img>
             </a>
           </div>
-          <Nav />
+          <Nav addTask={addTask} />
         </div>
       </div>
     </header>

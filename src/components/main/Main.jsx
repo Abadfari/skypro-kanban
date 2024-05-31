@@ -2,7 +2,7 @@ import { statusData } from "../../lib/statusData";
 import { taskData } from "../../lib/taskData";
 import Column from "../column/Column";
 
-const Main = () => {
+const Main = ({ taskData }) => {
   return (
     <main className="main">
       <div className="container">
