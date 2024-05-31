@@ -1,23 +1,21 @@
+import { useState } from "react";
+import UserPopup from "../userPopup/UserPopup";
+
 const Nav = () => {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <nav className="header__nav">
       <button className="header__btn-main-new _hover01" id="btnMainNew">
         <a href="#popNewCard">Создать новую задачу</a>
       </button>
-      <a href="#user-set-target" className="header__user _hover02">
+      <a
+        href="#user-set-target"
+        className="header__user _hover02"
+        onClick={() => setIsOpen(!isOpen)}
+      >
         Ivan Ivanov
       </a>
-      <div className="header__pop-user-set pop-user-set" id="user-set-target">
-        <p className="pop-user-set__name">Ivan Ivanov</p>
-        <p className="pop-user-set__mail">ivan.ivanov@gmail.com</p>
-        <div className="pop-user-set__theme">
-          <p>Темная тема</p>
-          <input type="checkbox" className="checkbox" name="checkbox"></input>
-        </div>
-        <button type="button" className="_hover03">
-          <a href="#popExit">Выйти</a>
-        </button>
-      </div>
+      {isOpen && <UserPopup />}
     </nav>
   );
 };
