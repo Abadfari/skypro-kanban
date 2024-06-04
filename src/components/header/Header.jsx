@@ -1,8 +1,9 @@
 import Nav from "../nav/Nav";
+import * as S from "./Header.styled"
 
 const Header = ({ addTask }) => {
   return (
-    <header className="header">
+    <S.Header>
       <div className="container">
         <div className="header__block">
           <div className="header__logo _show _light">
@@ -18,7 +19,7 @@ const Header = ({ addTask }) => {
           <Nav addTask={addTask} />
         </div>
       </div>
-    </header>
+    </S.Header>
   );
 };
 

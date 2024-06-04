@@ -1,11 +1,14 @@
+import { topicData } from "../../lib/cardData";
+import * as S from "./Card.styled";
+
 const Card = ({ title, date, topic }) => {
   return (
-    <div className="cards__item">
+    <S.CardItem>
       <div className="cards__card card">
         <div className="card__group">
-          <div className="card__theme _orange">
-            <p className="_orange">{topic}</p>
-          </div>
+          <S.CardTheme $color={topicData[topic] || "_gray"}>
+            <p>{topic}</p>
+          </S.CardTheme>
           <a href="#popBrowse" target="_self">
             <div className="card__btn">
               <div></div>
@@ -51,7 +54,7 @@ const Card = ({ title, date, topic }) => {
           </div>
         </div>
       </div>
-    </div>
+    </S.CardItem>
   );
 };
 

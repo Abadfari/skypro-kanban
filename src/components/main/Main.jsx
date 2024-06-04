@@ -1,5 +1,4 @@
 import { statusData } from "../../lib/statusData";
-import { taskData } from "../../lib/taskData";
 import Column from "../column/Column";
 
 const Main = ({ taskData }) => {

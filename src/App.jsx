@@ -6,6 +6,8 @@ import Header from "./components/header/Header";
 import Main from "./components/main/Main";
 import { useEffect, useState } from "react";
 import { taskData } from "./lib/taskData";
+import * as Shared from "./shared/Shared.styled";
+import { GlobalStyles } from "./shared/Global.styled";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -30,7 +32,8 @@ function App() {
 
   return (
     <>
-      <div className="wrapper">
+      <GlobalStyles />
+      <Shared.Wrapper>
         {/* <!-- pop-up start--> */}
 
         <PopExit />
@@ -43,9 +46,7 @@ function App() {
 
         <Header addTask={addTask} />
         {isLoading ? <div>Идет загрузка...</div> : <Main taskData={tasks} />}
-      </div>
-
-      <script src="js/script.js"></script>
+      </Shared.Wrapper>
     </>
   );
 }
