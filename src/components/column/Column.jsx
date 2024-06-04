@@ -1,12 +1,13 @@
 import Card from "../card/Card";
+import { Cards, ColumnTitle, MainColumn } from "./Column.styled";
 
 const Column = ({ title, tasks }) => {
   return (
-    <div className="main__column column">
-      <div className="column__title">
+    <MainColumn>
+      <ColumnTitle>
         <p>{title}</p>
-      </div>
-      <div className="cards">
+      </ColumnTitle>
+      <Cards>
         {tasks.map((task, index) => (
           <Card
             key={index}
@@ -15,8 +16,8 @@ const Column = ({ title, tasks }) => {
             topic={task.topic}
           />
         ))}
-      </div>
-    </div>
+      </Cards>
+    </MainColumn>
   );
 };
 

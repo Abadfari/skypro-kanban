@@ -1,5 +1,3 @@
-
-
 @keyframes card-animation {
   0% {
     height: 0;
@@ -11,26 +9,26 @@
   }
 }
 
-.wrapper {
-  /* max-width: 100%;
+/* .wrapper {
+  max-width: 100%;
   width: 100vw;
   min-height: 100vh;
   overflow: hidden;
-  background-color: #f1f1f1; */
-}
+  background-color: #f1f1f1;
+} */
 
-.container {
+/* .container {
   max-width: 1260px;
   width: 100%;
   margin: 0 auto;
   padding: 0 30px;
-}
+} */
 
-._hover01:hover {
-  /* background-color: #33399b; */
-}
+/* ._hover01:hover {
+  background-color: #33399b;
+} */
 
-._hover02:hover,
+/* ._hover02:hover,
 .header__user:hover {
   color: #33399b;
 }
@@ -38,17 +36,16 @@
 .header__user:hover::after {
   border-left-color: #33399b;
   border-bottom-color: #33399b;
-}
+} */
 
-._hover03:hover {
+/* ._hover03:hover {
   background-color: #33399b;
   color: #ffffff;
 }
 ._hover03:hover a {
   color: #ffffff;
-}
+} */
 
-.pop-user-set:target,
 .pop-exit:target,
 .pop-new-card:target,
 .pop-browse:target {
@@ -182,34 +179,34 @@
   justify-content: space-between;
 }
 
-.pop-user-set__name {
+/* .pop-user-set__name {
   color: #000;
   font-size: 14px;
   font-weight: 500;
   line-height: 21px;
   letter-spacing: -0.14px;
   margin-bottom: 4px;
-}
-.pop-user-set__mail {
+} */
+/* .pop-user-set__mail {
   color: #94a6be;
   font-size: 14px;
   line-height: 21px;
   letter-spacing: -0.14px;
   margin-bottom: 10px;
-}
-.pop-user-set__theme {
+} */
+/* .pop-user-set__theme {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 30px;
-}
-.pop-user-set__theme p {
+} */
+/* .pop-user-set__theme p {
   color: #000;
   font-size: 14px;
   line-height: 21px;
   letter-spacing: -0.14px;
-}
-.pop-user-set__theme input[type="checkbox"] {
+} */
+/* .pop-user-set__theme input[type="checkbox"] {
   position: relative;
   width: 24px;
   height: 13px;
@@ -233,8 +230,8 @@
 }
 .pop-user-set__theme input:checked[type="checkbox"]::before {
   left: 12px;
-}
-.pop-user-set button {
+} */
+/* .pop-user-set button {
   width: 72px;
   height: 30px;
   background: transparent;
@@ -244,7 +241,7 @@
 }
 .pop-user-set button a {
   color: #565eef;
-}
+} */
 
 .pop-new-card {
   display: none;
@@ -685,16 +682,16 @@
   display: none;
 }
 
-._dark {
+/* ._dark {
   display: none;
-}
+} */
 
-.header {
-  /* width: 100%;
+/* .header {
+  width: 100%;
   margin: 0 auto;
-  background-color: #ffffff; */
-}
-.header__block {
+  background-color: #ffffff;
+} */
+/* .header__block {
   height: 70px;
   display: flex;
   flex-wrap: nowrap;
@@ -704,19 +701,19 @@
   top: 0;
   left: 0;
   padding: 0 10px;
-}
-.header__logo img {
+} */
+/* .header__logo img {
   width: 85px;
-}
-.header__nav {
+} */
+/* .header__nav {
   max-width: 290px;
   padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-.header__btn-main-new {
-  /* width: 178px;
+} */
+/* .header__btn-main-new {
+  width: 178px;
   height: 30px;
   border-radius: 4px;
   background-color: #565eef;
@@ -725,12 +722,12 @@
   font-size: 14px;
   line-height: 1;
   font-weight: 500;
-  margin-right: 20px; */
-}
+  margin-right: 20px;
+} */
 .header__btn-main-new a {
   color: #ffffff;
 }
-.header__user {
+/* .header__user {
   height: 20px;
   display: flex;
   flex-wrap: nowrap;
@@ -739,8 +736,8 @@
   font-size: 14px;
   line-height: 20px;
   color: #565eef;
-}
-.header__user::after {
+} */
+/* .header__user::after {
   content: "";
   display: block;
   width: 6px;
@@ -751,8 +748,8 @@
   transform: rotate(-45deg);
   margin: -6px 0 0 5px;
   padding: 0;
-}
-.header__pop-user-set {
+} */
+/* .header__pop-user-set {
   position: absolute;
   top: 61px;
   right: 0;
@@ -765,51 +762,51 @@
   padding: 34px;
   text-align: center;
   z-index: 2;
-}
+} */
 
-.main {
+/* .main {
   width: 100%;
   background-color: #eaeef6;
-}
-.main__block {
+} */
+/* .main__block {
   width: 100%;
   margin: 0 auto;
   padding: 25px 0 49px;
-}
-.main__content {
+} */
+/* .main__content {
   width: 100%;
   display: flex;
-}
-.main__column {
+} */
+/* .main__column {
   width: 20%;
   margin: 0 auto;
   display: block;
-}
+} */
 
-.column__title {
+/* .column__title {
   padding: 0 10px;
   margin: 15px 0;
-}
-.column__title p {
+} */
+/* .column__title p {
   color: #94a6be;
   font-size: 14px;
   font-weight: 600;
   line-height: 1;
   text-transform: uppercase;
-}
+} */
 
-.cards {
+/* .cards {
   width: 100%;
   display: block;
   position: relative;
-}
-.cards__item {
-  /* padding: 5px;
+} */
+/* .cards__item {
+  padding: 5px;
   animation-name: card-animation;
   animation-duration: 500ms;
-  animation-timing-function: linear; */
-}
-.cards__card {
+  animation-timing-function: linear;
+} */
+/* .cards__card {
   width: 220px;
   height: 130px;
   background-color: #ffffff;
@@ -819,61 +816,61 @@
   align-items: flex-start;
   justify-content: stretch;
   padding: 15px 13px 19px;
-}
+} */
 
-.card__group {
+/* .card__group {
   width: 100%;
   height: 20px;
   margin-bottom: 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-.card__theme {
-  /* width: auto;
+} */
+/* .card__theme {
+  width: auto;
   height: 20px;
   padding: 5px 14px;
-  border-radius: 18px; */
-}
-.card__theme p {
+  border-radius: 18px;
+} */
+/* .card__theme p {
   font-size: 10px;
   font-weight: 600;
   line-height: 10px;
-}
-.card__btn {
+} */
+/* .card__btn {
   width: 24px;
   height: 24px;
   display: flex;
   align-items: center;
   justify-content: space-around;
   padding: 2px;
-}
-.card__btn div {
+} */
+/* .card__btn div {
   width: 4px;
   height: 4px;
   border-radius: 50%;
   background-color: #94a6be;
-}
-.card__title {
+} */
+/* .card__title {
   font-size: 14px;
   font-weight: 500;
   line-height: 18px;
   color: #000000;
   margin-bottom: 10px;
-}
-.card__content {
+} */
+/* .card__content {
   height: 64px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-}
-.card__date {
+} */
+/* .card__date {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-}
-.card__date svg {
+} */
+/* .card__date svg {
   width: 13px;
 }
 .card__date p {
@@ -882,7 +879,7 @@
   line-height: 13px;
   color: #94a6be;
   letter-spacing: 0.2px;
-}
+} */
 
 @media screen and (max-width: 1200px) {
   .main__block {

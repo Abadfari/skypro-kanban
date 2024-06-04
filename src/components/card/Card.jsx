@@ -4,24 +4,24 @@ import * as S from "./Card.styled";
 const Card = ({ title, date, topic }) => {
   return (
     <S.CardItem>
-      <div className="cards__card card">
-        <div className="card__group">
+      <S.Card>
+        <S.CardGroup>
           <S.CardTheme $color={topicData[topic] || "_gray"}>
             <p>{topic}</p>
           </S.CardTheme>
           <a href="#popBrowse" target="_self">
-            <div className="card__btn">
+            <S.CardBtn>
               <div></div>
               <div></div>
               <div></div>
-            </div>
+            </S.CardBtn>
           </a>
-        </div>
-        <div className="card__content">
+        </S.CardGroup>
+        <S.CardContent>
           <a href="" target="_blank">
-            <h3 className="card__title">{title}</h3>
+            <S.CardTitle>{title}</S.CardTitle>
           </a>
-          <div className="card__date">
+          <S.CardDate>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="13"
@@ -51,9 +51,9 @@ const Card = ({ title, date, topic }) => {
               </defs>
             </svg>
             <p>{date}</p>
-          </div>
-        </div>
-      </div>
+          </S.CardDate>
+        </S.CardContent>
+      </S.Card>
     </S.CardItem>
   );
 };

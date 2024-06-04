@@ -1,16 +1,24 @@
+import {
+  HeaderPopUserSet,
+  PopUserSetMail,
+  PopUserSetName,
+  PopUserSetTheme,
+  UserButton,
+} from "./UserPopup.styled";
+
 const UserPopup = () => {
   return (
-    <div className="header__pop-user-set pop-user-set" id="user-set-target">
-      <p className="pop-user-set__name">Ivan Ivanov</p>
-      <p className="pop-user-set__mail">ivan.ivanov@gmail.com</p>
-      <div className="pop-user-set__theme">
+    <HeaderPopUserSet>
+      <PopUserSetName>Ivan Ivanov</PopUserSetName>
+      <PopUserSetMail>ivan.ivanov@gmail.com</PopUserSetMail>
+      <PopUserSetTheme>
         <p>Темная тема</p>
-        <input type="checkbox" className="checkbox" name="checkbox"></input>
-      </div>
-      <button type="button" className="_hover03">
+        <input type="checkbox" name="checkbox"></input>
+      </PopUserSetTheme>
+      <UserButton type="button">
         <a href="#popExit">Выйти</a>
-      </button>
-    </div>
+      </UserButton>
+    </HeaderPopUserSet>
   );
 };
 

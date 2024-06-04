@@ -1,24 +1,20 @@
+import * as Shared from "../../shared/Shared.styled";
 import Nav from "../nav/Nav";
-import * as S from "./Header.styled"
+import * as S from "./Header.styled";
 
 const Header = ({ addTask }) => {
   return (
     <S.Header>
-      <div className="container">
-        <div className="header__block">
-          <div className="header__logo _show _light">
+      <Shared.Container>
+        <S.HeaderBlock>
+          <S.HeaderLogo>
             <a href="" target="_self">
               <img src="images/logo.png" alt="logo"></img>
             </a>
-          </div>
-          <div className="header__logo _dark">
-            <a href="" target="_self">
-              <img src="images/logo_dark.png" alt="logo"></img>
-            </a>
-          </div>
+          </S.HeaderLogo>
           <Nav addTask={addTask} />
-        </div>
-      </div>
+        </S.HeaderBlock>
+      </Shared.Container>
     </S.Header>
   );
 };
