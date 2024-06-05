@@ -1,13 +1,13 @@
 import Card from "../card/Card";
-import { Cards, ColumnTitle, MainColumn } from "./Column.styled";
+import * as S from "./Column.styled"
 
 const Column = ({ title, tasks }) => {
   return (
-    <MainColumn>
-      <ColumnTitle>
+    <S.MainColumn>
+      <S.ColumnTitle>
         <p>{title}</p>
-      </ColumnTitle>
-      <Cards>
+      </S.ColumnTitle>
+      <S.Cards>
         {tasks.map((task, index) => (
           <Card
             key={index}
@@ -16,8 +16,8 @@ const Column = ({ title, tasks }) => {
             topic={task.topic}
           />
         ))}
-      </Cards>
-    </MainColumn>
+      </S.Cards>
+    </S.MainColumn>
   );
 };
 

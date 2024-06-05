@@ -1,12 +1,12 @@
 import { statusData } from "../../lib/statusData";
-import { Container } from "../../shared/Shared.styled";
+import * as Shared from "../../shared/Shared.styled";
 import Column from "../column/Column";
 import * as S from "./Main.styled";
 
 const Main = ({ taskData }) => {
   return (
     <S.Main>
-      <Container>
+      <Shared.Container>
         <S.MainBlock>
           <S.MainContent>
             {statusData.map((status, index) => (
@@ -18,7 +18,7 @@ const Main = ({ taskData }) => {
             ))}
           </S.MainContent>
         </S.MainBlock>
-      </Container>
+      </Shared.Container>
     </S.Main>
   );
 };

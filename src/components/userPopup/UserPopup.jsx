@@ -1,24 +1,18 @@
-import {
-  HeaderPopUserSet,
-  PopUserSetMail,
-  PopUserSetName,
-  PopUserSetTheme,
-  UserButton,
-} from "./UserPopup.styled";
+import * as S from "./UserPopup.styled";
 
 const UserPopup = () => {
   return (
-    <HeaderPopUserSet>
-      <PopUserSetName>Ivan Ivanov</PopUserSetName>
-      <PopUserSetMail>ivan.ivanov@gmail.com</PopUserSetMail>
-      <PopUserSetTheme>
+    <S.HeaderPopUserSet>
+      <S.PopUserSetName>Ivan Ivanov</S.PopUserSetName>
+      <S.PopUserSetMail>ivan.ivanov@gmail.com</S.PopUserSetMail>
+      <S.PopUserSetTheme>
         <p>Темная тема</p>
         <input type="checkbox" name="checkbox"></input>
-      </PopUserSetTheme>
-      <UserButton type="button">
+      </S.PopUserSetTheme>
+      <S.UserButton type="button">
         <a href="#popExit">Выйти</a>
-      </UserButton>
-    </HeaderPopUserSet>
+      </S.UserButton>
+    </S.HeaderPopUserSet>
   );
 };
 
