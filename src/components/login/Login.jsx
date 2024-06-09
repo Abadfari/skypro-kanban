@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { routes } from "../../lib/routes";
 
-const Login = () => {
+const Login = ({ login }) => {
   return (
     <div className="modal__block">
       <div className="modal__ttl">
@@ -22,8 +22,12 @@ const Login = () => {
         id="formpassword"
         placeholder="Пароль"
       />
-      <button className="modal__btn-enter _hover01" id="btnEnter">
-        <Link to={routes.BOARD}>Войти</Link>
+      <button
+        className="modal__btn-enter _hover01"
+        id="btnEnter"
+        onClick={login}
+      >
+        Войти
       </button>
       <div className="modal__form-group">
         <p>Нужно зарегистрироваться?</p>
