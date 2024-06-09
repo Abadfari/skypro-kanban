@@ -1,22 +1,19 @@
 import { useState } from "react";
 import UserPopup from "../userPopup/UserPopup";
+import * as S from "./Nav.styled";
 
-const Nav = () => {
+const Nav = ({ addTask }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <nav className="header__nav">
-      <button className="header__btn-main-new _hover01" id="btnMainNew">
+    <S.HeaderNav>
+      <S.Button onClick={addTask}>
         <a href="#popNewCard">Создать новую задачу</a>
-      </button>
-      <a
-        href="#user-set-target"
-        className="header__user _hover02"
-        onClick={() => setIsOpen(!isOpen)}
-      >
+      </S.Button>
+      <S.HeaderUser href="#" onClick={() => setIsOpen(!isOpen)}>
         Ivan Ivanov
-      </a>
+      </S.HeaderUser>
       {isOpen && <UserPopup />}
-    </nav>
+    </S.HeaderNav>
   );
 };
 

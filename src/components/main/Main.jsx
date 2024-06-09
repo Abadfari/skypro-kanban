@@ -1,13 +1,14 @@
 import { statusData } from "../../lib/statusData";
-import { taskData } from "../../lib/taskData";
+import * as Shared from "../../shared/Shared.styled";
 import Column from "../column/Column";
+import * as S from "./Main.styled";
 
-const Main = () => {
+const Main = ({ taskData }) => {
   return (
-    <main className="main">
-      <div className="container">
-        <div className="main__block">
-          <div className="main__content">
+    <S.Main>
+      <Shared.Container>
+        <S.MainBlock>
+          <S.MainContent>
             {statusData.map((status, index) => (
               <Column
                 key={index}
@@ -15,10 +16,10 @@ const Main = () => {
                 tasks={taskData.filter((task) => status === task.status)}
               />
             ))}
-          </div>
-        </div>
-      </div>
-    </main>
+          </S.MainContent>
+        </S.MainBlock>
+      </Shared.Container>
+    </S.Main>
   );
 };
 
