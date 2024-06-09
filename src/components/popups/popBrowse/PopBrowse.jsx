@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import { routes } from "../../../lib/routes";
 import Calendar from "../../calendar/Calendar";
 
 const PopBrowse = () => {
@@ -51,7 +53,7 @@ const PopBrowse = () => {
                   ></textarea>
                 </div>
               </form>
-              <Calendar/>
+              <Calendar />
             </div>
             <div className="theme-down__categories theme-down">
               <p className="categories__p subttl">Категория</p>
@@ -69,7 +71,7 @@ const PopBrowse = () => {
                 </button>
               </div>
               <button className="btn-browse__close _btn-bg _hover01">
-                <a href="#">Закрыть</a>
+                <Link to={routes.BOARD}>Закрыть</Link>
               </button>
             </div>
             <div className="pop-browse__btn-edit _hide">

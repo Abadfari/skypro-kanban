@@ -1,4 +1,6 @@
+import { Link } from "react-router-dom";
 import * as S from "./UserPopup.styled";
+import { routes } from "../../lib/routes";
 
 const UserPopup = () => {
   return (
@@ -10,7 +12,7 @@ const UserPopup = () => {
         <input type="checkbox" name="checkbox"></input>
       </S.PopUserSetTheme>
       <S.UserButton type="button">
-        <a href="#popExit">Выйти</a>
+        <Link to={routes.EXIT}>Выйти</Link>
       </S.UserButton>
     </S.HeaderPopUserSet>
   );
