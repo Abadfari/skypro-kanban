@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
 import { topicData } from "../../lib/cardData";
 import * as S from "./Card.styled";
-import { routes } from "../../lib/routes";
 
-const Card = ({ title, date, topic }) => {
+const Card = ({ title, date, topic, id }) => {
   return (
     <S.CardItem>
       <S.Card>
@@ -11,7 +10,7 @@ const Card = ({ title, date, topic }) => {
           <S.CardTheme $color={topicData[topic] || "_gray"}>
             <p>{topic}</p>
           </S.CardTheme>
-          <Link to={routes.CARD}>
+          <Link to={`/card/${id}`}>
             <S.CardBtn>
               <div></div>
               <div></div>

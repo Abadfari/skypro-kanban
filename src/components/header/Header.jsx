@@ -11,7 +11,7 @@ const Header = ({ addTask }) => {
         <S.HeaderBlock>
           <S.HeaderLogo>
             <Link to={routes.BOARD}>
-              <img src="images/logo.png" alt="logo"></img>
+              <img src="/images/logo.png" alt="logo"></img>
             </Link>
           </S.HeaderLogo>
           <Nav addTask={addTask} />

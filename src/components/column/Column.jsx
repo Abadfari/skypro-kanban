@@ -1,5 +1,5 @@
 import Card from "../card/Card";
-import * as S from "./Column.styled"
+import * as S from "./Column.styled";
 
 const Column = ({ title, tasks }) => {
   return (
@@ -14,6 +14,7 @@ const Column = ({ title, tasks }) => {
             title={task.title}
             date={task.date}
             topic={task.topic}
+            id={task._id}
           />
         ))}
       </S.Cards>
