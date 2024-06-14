@@ -21,7 +21,7 @@ function AppRoutes() {
       setUser(userData);
       navigate(routes.BOARD);
     }
-  }, []);
+  }, [navigate]);
 
   function login(userData) {
     localStorage.setItem("userData", JSON.stringify(userData));
