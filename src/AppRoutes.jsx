@@ -1,5 +1,4 @@
 import { Routes, Route, useNavigate } from "react-router-dom";
-
 import { routes } from "./lib/routes";
 import LoginPage from "./pages/login/Login";
 import RegisterPage from "./pages/register/Register";
@@ -14,13 +13,16 @@ import BoardPage from "./pages/board/Board";
 
 function AppRoutes() {
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
   useEffect(() => {
     const userData = getUserFromLocalStorage();
+    console.log(userData);
     if (userData) {
       setUser(userData);
+      navigate(routes.BOARD);
     }
   }, []);
-  const navigate = useNavigate();
+
   function login(userData) {
     localStorage.setItem("userData", JSON.stringify(userData));
     setUser(userData);
@@ -44,7 +46,7 @@ function AppRoutes() {
         </Route>
       </Route>
       <Route path={routes.LOGIN} element={<LoginPage login={login} />} />
-      <Route path={routes.REGISTER} element={<RegisterPage />} />
+      <Route path={routes.REGISTER} element={<RegisterPage login={login} />} />
       <Route path={routes.NOT_FOUND} element={<NotFoundPage />} />
     </Routes>
   );

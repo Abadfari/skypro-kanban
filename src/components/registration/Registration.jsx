@@ -2,7 +2,8 @@ import { routes } from "../../lib/routes";
 import * as S from "./Registration.styled";
 import * as Shared from "../../shared/Shared.styled";
 import { useState } from "react";
-import { loginUser } from "../../API/auth";
+import { register } from "../../API/auth";
+import { useNavigate } from "react-router-dom";
 
 const Registration = () => {
   const [formValue, setFormValue] = useState({
@@ -11,6 +12,7 @@ const Registration = () => {
     password: "",
   });
   const [error, setError] = useState("");
+  const navigate = useNavigate();
   function onChange(event) {
     const { value, name } = event.target;
     setFormValue({
@@ -20,17 +22,21 @@ const Registration = () => {
   }
   function onClick(event) {
     event.preventDefault();
-    if (!formValue.login.trim() || !formValue.password.trim()) {
+    if (
+      !formValue.name.trim() ||
+      !formValue.login.trim() ||
+      !formValue.password.trim()
+    ) {
       setError("Заполните все поля!");
       return;
     }
-    loginUser({
+    register({
       name: formValue.name,
       login: formValue.login,
       password: formValue.password,
     })
-      .then((userData) => {
-        login(userData.user);
+      .then(() => {
+        navigate(routes.LOGIN);
       })
       .catch((error) => {
         setError(error.message);
@@ -48,8 +54,8 @@ const Registration = () => {
             <S.ModalFormRegistration
               placeholder="Имя"
               type="text"
-              name="login"
-              value={formValue.login}
+              name="name"
+              value={formValue.name}
               onChange={onChange}
             />
             <S.ModalFormRegistration

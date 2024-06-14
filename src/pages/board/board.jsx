@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import Header from "../../components/header/Header";
 import Main from "../../components/main/Main";
-import { taskData } from "../../lib/taskData";
 import { Outlet } from "react-router-dom";
+import { getTasks } from "../../API/tasks";
 
 const BoardPage = ({ user }) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [tasks, setTasks] = useState(taskData);
+  const [tasks, setTasks] = useState([]);
+  const [error, setError] = useState("");
   const addTask = () => {
     const newTask = {
       _id: tasks.length + 1,
@@ -19,15 +20,27 @@ const BoardPage = ({ user }) => {
     setTasks([...tasks, newTask]);
   };
   useEffect(() => {
-    const timeOutId = setTimeout(() => setIsLoading(false), 3000);
-    return () => {
-      clearTimeout(timeOutId);
-    };
+    getTasks({ token: user.token })
+      .then((data) => {
+        setTasks(data.tasks);
+      })
+      .catch((error) => {
+        setError(error.message);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, []);
   return (
     <>
       <Header user={user} addTask={addTask} />
-      {isLoading ? <div>Идет загрузка...</div> : <Main taskData={tasks} />}
+      {error ? (
+        <div>Не удалось загрузить задачи</div>
+      ) : isLoading ? (
+        <div>Идет загрузка...</div>
+      ) : (
+        <Main taskData={tasks} />
+      )}
       <Outlet />
     </>
   );
