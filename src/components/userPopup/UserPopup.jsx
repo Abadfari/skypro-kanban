@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 import * as S from "./UserPopup.styled";
 import { routes } from "../../lib/routes";
 
-const UserPopup = () => {
+const UserPopup = ({ user }) => {
   return (
     <S.HeaderPopUserSet>
-      <S.PopUserSetName>Ivan Ivanov</S.PopUserSetName>
-      <S.PopUserSetMail>ivan.ivanov@gmail.com</S.PopUserSetMail>
+      <S.PopUserSetName>{user?.name}</S.PopUserSetName>
+      <S.PopUserSetMail>{user?.login}</S.PopUserSetMail>
       <S.PopUserSetTheme>
         <p>Темная тема</p>
         <input type="checkbox" name="checkbox"></input>

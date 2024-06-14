@@ -4,7 +4,7 @@ import * as S from "./Nav.styled";
 import { Link } from "react-router-dom";
 import { routes } from "../../lib/routes";
 
-const Nav = ({ addTask }) => {
+const Nav = ({ addTask, user }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <S.HeaderNav>
@@ -12,9 +12,9 @@ const Nav = ({ addTask }) => {
         <Link to={routes.ADD_CARD}>Создать новую задачу</Link>
       </S.Button>
       <S.HeaderUser href="#" onClick={() => setIsOpen(!isOpen)}>
-        Ivan Ivanov
+        {user?.login}
       </S.HeaderUser>
-      {isOpen && <UserPopup />}
+      {isOpen && <UserPopup user={user} />}
     </S.HeaderNav>
   );
 };

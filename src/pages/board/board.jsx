@@ -4,7 +4,7 @@ import Main from "../../components/main/Main";
 import { taskData } from "../../lib/taskData";
 import { Outlet } from "react-router-dom";
 
-const BoardPage = () => {
+const BoardPage = ({ user }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [tasks, setTasks] = useState(taskData);
   const addTask = () => {
@@ -26,7 +26,7 @@ const BoardPage = () => {
   }, []);
   return (
     <>
-      <Header addTask={addTask} />
+      <Header user={user} addTask={addTask} />
       {isLoading ? <div>Идет загрузка...</div> : <Main taskData={tasks} />}
       <Outlet />
     </>

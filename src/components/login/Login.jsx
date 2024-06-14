@@ -1,8 +1,36 @@
 import { routes } from "../../lib/routes";
 import * as S from "./Login.styled";
 import * as Shared from "../../shared/Shared.styled";
+import { useState } from "react";
+import { loginUser } from "../../API/auth";
 
 const Login = ({ login }) => {
+  const [formValue, setFormValue] = useState({
+    login: "",
+    password: "",
+  });
+  const [error, setError] = useState("");
+  function onChange(event) {
+    const { value, name } = event.target;
+    setFormValue({
+      ...formValue,
+      [name]: value,
+    });
+  }
+  function onClick(event) {
+    event.preventDefault();
+    if (!formValue.login.trim() || !formValue.password.trim()) {
+      setError("Заполните все поля!");
+      return;
+    }
+    loginUser({ login: formValue.login, password: formValue.password })
+      .then((userData) => {
+        login(userData.user);
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+  }
   return (
     <Shared.LoginWrapper>
       <S.Modal>
@@ -11,10 +39,23 @@ const Login = ({ login }) => {
             <h2>Вход</h2>
           </S.ModalTitle>
           <S.ModalInputWrapper>
-            <S.ModalFormLogin placeholder="Эл. почта" />
-            <S.ModalFormLogin placeholder="Пароль" />
+            <S.ModalFormLogin
+              placeholder="Эл. почта"
+              type="text"
+              name="login"
+              value={formValue.login}
+              onChange={onChange}
+            />
+            <S.ModalFormLogin
+              placeholder="Пароль"
+              type="password"
+              name="password"
+              value={formValue.password}
+              onChange={onChange}
+            />
+            <p>{error}</p>
           </S.ModalInputWrapper>
-          <S.Button onClick={login}>Войти</S.Button>
+          <S.Button onClick={onClick}>Войти</S.Button>
           <S.ModalFormGroup>
             <p>Нужно зарегистрироваться?</p>
             <S.StyledLinkLogin to={routes.REGISTER}>

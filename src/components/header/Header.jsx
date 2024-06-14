@@ -4,7 +4,7 @@ import Nav from "../nav/Nav";
 import * as S from "./Header.styled";
 import { routes } from "../../lib/routes";
 
-const Header = ({ addTask }) => {
+const Header = ({ addTask, user }) => {
   return (
     <S.Header>
       <Shared.Container>
@@ -14,7 +14,7 @@ const Header = ({ addTask }) => {
               <img src="/images/logo.png" alt="logo"></img>
             </Link>
           </S.HeaderLogo>
-          <Nav addTask={addTask} />
+          <Nav user={user} addTask={addTask} />
         </S.HeaderBlock>
       </Shared.Container>
     </S.Header>

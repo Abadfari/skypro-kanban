@@ -7,24 +7,33 @@ import NotFoundPage from "./pages/notFound/NotFound";
 import AddCardPage from "./pages/addCard/AddCard";
 import CardPage from "./pages/card/Card";
 import ExitPage from "./pages/exit/Exit";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PrivateRoute from "./components/route/PrivateRoute";
+import { getUserFromLocalStorage } from "./lib/helpers";
 
 function AppRoutes() {
-  const [isAuth, setIsAuth] = useState(false);
+  const [user, setUser] = useState(false);
+  useEffect(() => {
+    const userData = getUserFromLocalStorage();
+    if (userData) {
+      setUser(userData);
+    }
+  }, []);
   const navigate = useNavigate();
-  function login() {
-    setIsAuth(true);
+  function login(userData) {
+    localStorage.setItem("userData", JSON.stringify(userData));
+    setUser(userData);
     navigate(routes.BOARD);
   }
   function logout() {
-    setIsAuth(false);
+    localStorage.removeItem("userData");
+    setUser(null);
     navigate(routes.LOGIN);
   }
   return (
     <Routes>
-      <Route element={<PrivateRoute isAuth={isAuth} />}>
-        <Route path={routes.BOARD} element={<BoardPage />}>
+      <Route element={<PrivateRoute isAuth={user} />}>
+        <Route path={routes.BOARD} element={<BoardPage user={user} />}>
           <Route path={routes.ADD_CARD} element={<AddCardPage />} />
           <Route path={routes.CARD} element={<CardPage />} />
           <Route path={routes.EXIT} element={<ExitPage logout={logout} />} />
