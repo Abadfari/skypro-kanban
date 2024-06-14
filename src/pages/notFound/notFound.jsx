@@ -4,7 +4,7 @@ const NotFoundPage = () => {
   return (
     <div>
       Такой страницы не существует...
-      <Link to="/" />
+      <Link to="/">На главную</Link>
     </div>
   );
 };

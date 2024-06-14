@@ -1,51 +1,83 @@
-import { Link } from "react-router-dom";
 import { routes } from "../../lib/routes";
-// import * as S from "./Registration.styled";
-// import * as Shared from "../../shared/Shared.styled";
+import * as S from "./Registration.styled";
+import * as Shared from "../../shared/Shared.styled";
+import { useState } from "react";
+import { loginUser } from "../../API/auth";
 
 const Registration = () => {
+  const [formValue, setFormValue] = useState({
+    name: "",
+    login: "",
+    password: "",
+  });
+  const [error, setError] = useState("");
+  function onChange(event) {
+    const { value, name } = event.target;
+    setFormValue({
+      ...formValue,
+      [name]: value,
+    });
+  }
+  function onClick(event) {
+    event.preventDefault();
+    if (!formValue.login.trim() || !formValue.password.trim()) {
+      setError("Заполните все поля!");
+      return;
+    }
+    loginUser({
+      name: formValue.name,
+      login: formValue.login,
+      password: formValue.password,
+    })
+      .then((userData) => {
+        login(userData.user);
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+  }
+
   return (
-    <div className="wrapper">
-      <div className="container-signup">
-        <div className="modal">
-          <div className="modal__block">
-            <div className="modal__ttl">
-              <h2>Регистрация</h2>
-            </div>
-            <form className="modal__form-login" id="formLogUp" action="#" />
-            <input
-              className="modal__input first-name"
-              type="text"
-              name="first-name"
-              id="first-name"
+    <Shared.LoginWrapper>
+      <S.Modal>
+        <S.ModalBlock>
+          <S.ModalTitle>
+            <h2>Регистрация</h2>
+          </S.ModalTitle>
+          <S.ModalInputWrapper>
+            <S.ModalFormRegistration
               placeholder="Имя"
-            />
-            <input
-              className="modal__input login"
               type="text"
               name="login"
-              id="loginReg"
-              placeholder="Эл. почта"
+              value={formValue.login}
+              onChange={onChange}
             />
-            <input
-              className="modal__input password-first"
+            <S.ModalFormRegistration
+              placeholder="Эл. почта"
+              type="text"
+              name="login"
+              value={formValue.login}
+              onChange={onChange}
+            />
+            <S.ModalFormRegistration
+              placeholder="Пароль"
               type="password"
               name="password"
-              id="passwordFirst"
-              placeholder="Пароль"
+              value={formValue.password}
+              onChange={onChange}
             />
-            <button className="modal__btn-signup-ent _hover01" id="SignUpEnter">
-              <a href="../main.html">Зарегистрироваться</a>{" "}
-            </button>
-            <div className="modal__form-group">
-              <p>
-                Уже есть аккаунт? <Link to={routes.LOGIN}>Войдите здесь</Link>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+            <p>{error}</p>
+          </S.ModalInputWrapper>
+          <S.Button onClick={onClick}>Зарегистрироваться</S.Button>
+          <S.ModalFormGroup>
+            <p>Уже есть аккаунт?</p>
+            <S.StyledLinkRegistration to={routes.LOGIN}>
+              Войдите здесь
+            </S.StyledLinkRegistration>
+          </S.ModalFormGroup>
+        </S.ModalBlock>
+      </S.Modal>
+    </Shared.LoginWrapper>
   );
 };
 
