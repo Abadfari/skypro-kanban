@@ -2,7 +2,7 @@ import { routes } from "../../lib/routes";
 import * as S from "./Registration.styled";
 import * as Shared from "../../shared/Shared.styled";
 import { useState } from "react";
-import { loginUser } from "../../API/auth";
+// import { loginUser } from "../../API/auth";
 
 const Registration = () => {
   const [formValue, setFormValue] = useState({
@@ -10,31 +10,13 @@ const Registration = () => {
     login: "",
     password: "",
   });
-  const [error, setError] = useState("");
+  // const [error, setError] = useState("");
   function onChange(event) {
     const { value, name } = event.target;
     setFormValue({
       ...formValue,
       [name]: value,
     });
-  }
-  function onClick(event) {
-    event.preventDefault();
-    if (!formValue.login.trim() || !formValue.password.trim()) {
-      setError("Заполните все поля!");
-      return;
-    }
-    loginUser({
-      name: formValue.name,
-      login: formValue.login,
-      password: formValue.password,
-    })
-      .then((userData) => {
-        login(userData.user);
-      })
-      .catch((error) => {
-        setError(error.message);
-      });
   }
 
   return (
@@ -66,9 +48,9 @@ const Registration = () => {
               value={formValue.password}
               onChange={onChange}
             />
-            <p>{error}</p>
+            {/* <p>{error}</p> */}
           </S.ModalInputWrapper>
-          <S.Button onClick={onClick}>Зарегистрироваться</S.Button>
+          <S.Button>Зарегистрироваться</S.Button>
           <S.ModalFormGroup>
             <p>Уже есть аккаунт?</p>
             <S.StyledLinkRegistration to={routes.LOGIN}>
