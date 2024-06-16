@@ -37,13 +37,26 @@ const BoardPage = ({ user }) => {
       {error ? (
         <div>Не удалось загрузить задачи</div>
       ) : isLoading ? (
-        <div>Идет загрузка...</div>
+        <div style={styles.container}>
+          <p style={styles.text}>Идет загрузка...</p>
+        </div>
       ) : (
         <Main taskData={tasks} />
       )}
       <Outlet />
     </>
   );
+};
+
+const styles = {
+  container: {
+    textAlign: "center",
+    marginTop: "50px",
+  },
+  text: {
+    fontSize: "20px",
+    marginBottom: "20px",
+  },
 };
 
 export default BoardPage;

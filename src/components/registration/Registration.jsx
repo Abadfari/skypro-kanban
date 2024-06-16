@@ -27,7 +27,9 @@ const Registration = () => {
       !formValue.login.trim() ||
       !formValue.password.trim()
     ) {
-      setError("Заполните все поля!");
+      setError(
+        "Введенные вами данные не корректны. Чтобы завершить регистрацию, заполните все поля в форме."
+      );
       return;
     }
     register({
@@ -72,7 +74,7 @@ const Registration = () => {
               value={formValue.password}
               onChange={onChange}
             />
-            <p>{error}</p>
+            <S.StyledErrorMessage>{error}</S.StyledErrorMessage>
           </S.ModalInputWrapper>
           <S.Button onClick={onClick}>Зарегистрироваться</S.Button>
           <S.ModalFormGroup>

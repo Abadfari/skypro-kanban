@@ -1,4 +1,4 @@
-const baseHost = "ps://wedev-api.sky.pro/api/kanban";
+const baseHost = "https://wedev-api.sky.pro/api/kanban";
 
 export function getTasks({ token }) {
   return fetch(baseHost, {

@@ -16,12 +16,11 @@ function AppRoutes() {
   const navigate = useNavigate();
   useEffect(() => {
     const userData = getUserFromLocalStorage();
-    console.log(userData);
     if (userData) {
       setUser(userData);
       navigate(routes.BOARD);
     }
-  }, [navigate]);
+  }, []);
 
   function login(userData) {
     localStorage.setItem("userData", JSON.stringify(userData));
