@@ -1,13 +1,16 @@
+import { Link, useParams } from "react-router-dom";
+import { routes } from "../../../lib/routes";
 import Calendar from "../../calendar/Calendar";
 
 const PopBrowse = () => {
+  const { id } = useParams();
   return (
     <div className="pop-browse" id="popBrowse">
       <div className="pop-browse__container">
         <div className="pop-browse__block">
           <div className="pop-browse__content">
             <div className="pop-browse__top-block">
-              <h3 className="pop-browse__ttl">Название задачи</h3>
+              <h3 className="pop-browse__ttl">Название задачи {id}</h3>
               <div className="categories__theme theme-top _orange _active-category">
                 <p className="_orange">Web Design</p>
               </div>
@@ -51,7 +54,7 @@ const PopBrowse = () => {
                   ></textarea>
                 </div>
               </form>
-              <Calendar/>
+              <Calendar />
             </div>
             <div className="theme-down__categories theme-down">
               <p className="categories__p subttl">Категория</p>
@@ -69,7 +72,7 @@ const PopBrowse = () => {
                 </button>
               </div>
               <button className="btn-browse__close _btn-bg _hover01">
-                <a href="#">Закрыть</a>
+                <Link to={routes.BOARD}>Закрыть</Link>
               </button>
             </div>
             <div className="pop-browse__btn-edit _hide">

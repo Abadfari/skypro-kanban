@@ -1,4 +1,7 @@
-const PopExit = () => {
+import { Link } from "react-router-dom";
+import { routes } from "../../../lib/routes";
+
+const PopExit = ({ logout }) => {
   return (
     <div className="pop-exit" id="popExit">
       <div className="pop-exit__container">
@@ -8,11 +11,15 @@ const PopExit = () => {
           </div>
           <form className="pop-exit__form" id="formExit" action="#">
             <div className="pop-exit__form-group">
-              <button className="pop-exit__exit-yes _hover01" id="exitYes">
-                <a href="modal/signin.html">Да, выйти</a>{" "}
+              <button
+                className="pop-exit__exit-yes _hover01"
+                id="exitYes"
+                onClick={logout}
+              >
+                Да, выйти
               </button>
               <button className="pop-exit__exit-no _hover03" id="exitNo">
-                <a href="main.html">Нет, остаться</a>{" "}
+                <Link to={routes.BOARD}>Нет, остаться</Link>
               </button>
             </div>
           </form>

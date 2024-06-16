@@ -40,3 +40,10 @@ export const Container = styled.div`
   margin: 0 auto;
   padding: 0 30px;
 `;
+
+export const LoginWrapper = styled.div`
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;

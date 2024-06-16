@@ -1,18 +1,20 @@
+import { Link } from "react-router-dom";
 import * as Shared from "../../shared/Shared.styled";
 import Nav from "../nav/Nav";
 import * as S from "./Header.styled";
+import { routes } from "../../lib/routes";
 
-const Header = ({ addTask }) => {
+const Header = ({ addTask, user }) => {
   return (
     <S.Header>
       <Shared.Container>
         <S.HeaderBlock>
           <S.HeaderLogo>
-            <a href="" target="_self">
-              <img src="images/logo.png" alt="logo"></img>
-            </a>
+            <Link to={routes.BOARD}>
+              <img src="/images/logo.png" alt="logo"></img>
+            </Link>
           </S.HeaderLogo>
-          <Nav addTask={addTask} />
+          <Nav user={user} addTask={addTask} />
         </S.HeaderBlock>
       </Shared.Container>
     </S.Header>
