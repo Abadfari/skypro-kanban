@@ -1,9 +1,32 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { routes } from "../../../lib/routes";
 import Calendar from "../../calendar/Calendar";
+import { deleteTasks } from "../../../API/tasks";
+import { useUser } from "../../../hooks/useUser";
+import { useTasks } from "../../../hooks/useTasks";
+import { useState } from "react";
 
 const PopBrowse = () => {
   const { id } = useParams();
+  const { user } = useUser();
+  const { setTasks } = useTasks();
+  const navigate = useNavigate();
+  const [error, setError] = useState("");
+
+  function onDelete(event) {
+    event.preventDefault();
+    deleteTasks({
+      token: user.token,
+      id,
+    })
+      .then((data) => {
+        setTasks(data.tasks);
+        navigate(-1);
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+  }
   return (
     <div className="pop-browse" id="popBrowse">
       <div className="pop-browse__container">
@@ -67,7 +90,10 @@ const PopBrowse = () => {
                 <button className="btn-browse__edit _btn-bor _hover03">
                   <a href="#">Редактировать задачу</a>
                 </button>
-                <button className="btn-browse__delete _btn-bor _hover03">
+                <button
+                  className="btn-browse__delete _btn-bor _hover03"
+                  onClick={onDelete}
+                >
                   <a href="#">Удалить задачу</a>
                 </button>
               </div>
@@ -75,6 +101,7 @@ const PopBrowse = () => {
                 <Link to={routes.BOARD}>Закрыть</Link>
               </button>
             </div>
+            {error}
             <div className="pop-browse__btn-edit _hide">
               <div className="btn-group">
                 <button className="btn-edit__edit _btn-bg _hover01">
@@ -90,6 +117,7 @@ const PopBrowse = () => {
                   <a href="#">Удалить задачу</a>
                 </button>
               </div>
+
               <button className="btn-edit__close _btn-bg _hover01">
                 <a href="#">Закрыть</a>
               </button>

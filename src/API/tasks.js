@@ -34,3 +34,18 @@ export function postTasks({ token, title, topic, status, description, date }) {
     return response.json();
   });
 }
+
+export function deleteTasks({ token, id }) {
+  return fetch(baseHost + "/" + id, {
+    method: "DELETE",
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  }).then((response) => {
+    if (response.status === 401) {
+      throw new Error("Нет авторизации");
+    }
+
+    return response.json();
+  });
+}
