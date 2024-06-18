@@ -20,7 +20,9 @@ const Login = ({ login }) => {
   function onClick(event) {
     event.preventDefault();
     if (!formValue.login.trim() || !formValue.password.trim()) {
-      setError("Заполните все поля!");
+      setError(
+        "Введенные вами данные не распознаны. Проверьте свой логин и пароль и повторите попытку входа."
+      );
       return;
     }
     loginUser({ login: formValue.login, password: formValue.password })
@@ -53,7 +55,7 @@ const Login = ({ login }) => {
               value={formValue.password}
               onChange={onChange}
             />
-            <p>{error}</p>
+            <S.StyledErrorMessage>{error}</S.StyledErrorMessage>
           </S.ModalInputWrapper>
           <S.Button onClick={onClick}>Войти</S.Button>
           <S.ModalFormGroup>

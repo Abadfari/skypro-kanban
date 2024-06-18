@@ -2,7 +2,8 @@ import { routes } from "../../lib/routes";
 import * as S from "./Registration.styled";
 import * as Shared from "../../shared/Shared.styled";
 import { useState } from "react";
-// import { loginUser } from "../../API/auth";
+import { register } from "../../API/auth";
+import { useNavigate } from "react-router-dom";
 
 const Registration = () => {
   const [formValue, setFormValue] = useState({
@@ -10,13 +11,38 @@ const Registration = () => {
     login: "",
     password: "",
   });
-  // const [error, setError] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
   function onChange(event) {
     const { value, name } = event.target;
     setFormValue({
       ...formValue,
       [name]: value,
     });
+  }
+  function onClick(event) {
+    event.preventDefault();
+    if (
+      !formValue.name.trim() ||
+      !formValue.login.trim() ||
+      !formValue.password.trim()
+    ) {
+      setError(
+        "Введенные вами данные не корректны. Чтобы завершить регистрацию, заполните все поля в форме."
+      );
+      return;
+    }
+    register({
+      name: formValue.name,
+      login: formValue.login,
+      password: formValue.password,
+    })
+      .then(() => {
+        navigate(routes.LOGIN);
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
   }
 
   return (
@@ -30,8 +56,8 @@ const Registration = () => {
             <S.ModalFormRegistration
               placeholder="Имя"
               type="text"
-              name="login"
-              value={formValue.login}
+              name="name"
+              value={formValue.name}
               onChange={onChange}
             />
             <S.ModalFormRegistration
@@ -48,9 +74,9 @@ const Registration = () => {
               value={formValue.password}
               onChange={onChange}
             />
-            {/* <p>{error}</p> */}
+            <S.StyledErrorMessage>{error}</S.StyledErrorMessage>
           </S.ModalInputWrapper>
-          <S.Button>Зарегистрироваться</S.Button>
+          <S.Button onClick={onClick}>Зарегистрироваться</S.Button>
           <S.ModalFormGroup>
             <p>Уже есть аккаунт?</p>
             <S.StyledLinkRegistration to={routes.LOGIN}>

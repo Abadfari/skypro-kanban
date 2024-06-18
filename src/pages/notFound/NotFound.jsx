@@ -11,7 +11,6 @@ const NotFoundPage = () => {
   );
 };
 
-
 const styles = {
   container: {
     textAlign: "center",

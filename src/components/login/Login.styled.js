@@ -75,3 +75,14 @@ export const ModalInputWrapper = styled.div`
   flex-direction: column;
   gap: 7px;
 `;
+
+export const StyledErrorMessage = styled.p`
+  font-family: Arial;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  text-align: center;
+  color: #f84d4d;
+  width: 247px;
+  max-height: 54px;
+`;
