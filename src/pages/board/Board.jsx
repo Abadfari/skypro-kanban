@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Header from "../../components/header/Header";
 import Main from "../../components/main/Main";
 import { Outlet } from "react-router-dom";
@@ -19,7 +19,7 @@ const BoardPage = ({ user }) => {
     };
     setTasks([...tasks, newTask]);
   };
-  useEffect(() => {
+  const handleTasks = useCallback(() => {
     getTasks({ token: user.token })
       .then((data) => {
         setTasks(data.tasks);
@@ -30,7 +30,10 @@ const BoardPage = ({ user }) => {
       .finally(() => {
         setIsLoading(false);
       });
-  }, []);
+  }, [user]);
+  useEffect(() => {
+    handleTasks();
+  }, [handleTasks]);
   return (
     <>
       <Header user={user} addTask={addTask} />
