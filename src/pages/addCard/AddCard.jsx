@@ -1,4 +1,4 @@
-import PopNewCard from "../../components/popups/popNewCard/PopNewCard";
+import PopNewCard from "../../components/popups/popNewCard/PopNewCard.jsx";
 
 const AddCardPage = () => {
   return <PopNewCard />;

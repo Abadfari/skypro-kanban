@@ -47,3 +47,39 @@ export const LoginWrapper = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+export const Categories = styled.div`
+  margin-bottom: 20px;
+`;
+
+export const Subttl = styled.label`
+  color: #000;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+`;
+
+export const Orange = styled.p`
+  background-color: #ffe4c2;
+  color: #ff6d00;
+`;
+
+export const Green = styled.p`
+  background-color: #b4fdd1;
+  color: #06b16e;
+`;
+
+export const Purple = styled.p`
+  background-color: #e9d4ff;
+  color: #9a48f1;
+  //
+`;
+
+// export const Gray = styled.p`
+//   background: #94a6be;
+//   color: #ffffff;
+// `;
+
+// export const ActiveCategory = css`
+//   opacity: 1 !important;
+// `;

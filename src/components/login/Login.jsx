@@ -3,8 +3,10 @@ import * as S from "./Login.styled";
 import * as Shared from "../../shared/Shared.styled";
 import { useState } from "react";
 import { loginUser } from "../../API/auth";
+import { useUser } from "../../hooks/useUser";
 
-const Login = ({ login }) => {
+const Login = () => {
+  const { login } = useUser();
   const [formValue, setFormValue] = useState({
     login: "",
     password: "",
