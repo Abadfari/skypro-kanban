@@ -1,7 +1,7 @@
 import Registration from "../../components/registration/Registration";
 
-const RegisterPage = ({ login }) => {
-  return <Registration login={login} />;
+const RegisterPage = () => {
+  return <Registration />;
 };
 
 export default RegisterPage;

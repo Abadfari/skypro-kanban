@@ -6,6 +6,7 @@ import { register } from "../../API/auth";
 import { useNavigate } from "react-router-dom";
 
 const Registration = () => {
+  
   const [formValue, setFormValue] = useState({
     name: "",
     login: "",
