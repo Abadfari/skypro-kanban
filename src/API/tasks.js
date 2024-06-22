@@ -49,3 +49,28 @@ export function deleteTasks({ token, id }) {
     return response.json();
   });
 }
+
+export function editTasks({
+  token,
+  title,
+  topic,
+  status,
+  description,
+  date,
+  id,
+}) {
+  return fetch(baseHost + "/" + id, {
+    method: "PUT",
+    body: JSON.stringify({ title, topic, status, description, date }),
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  }).then(async (response) => {
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.error);
+    }
+
+    return response.json();
+  });
+}

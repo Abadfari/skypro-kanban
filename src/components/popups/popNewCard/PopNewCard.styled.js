@@ -85,6 +85,8 @@ export const FormNewInput = styled.input`
   width: 100%;
   outline: none;
   padding: 14px;
+  margin-bottom: 20px;
+  margin-top: 20px;
   background: transparent;
   border: 0.7px solid rgba(148, 166, 190, 0.4);
   border-radius: 8px;
@@ -112,7 +114,6 @@ export const FormNewArea = styled.textarea`
   max-width: 370px;
   margin-top: 14px;
   height: 200px;
-  margin: 20px 0;
   width: 100%;
   outline: none;
   padding: 14px;

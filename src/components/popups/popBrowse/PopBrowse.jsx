@@ -1,17 +1,85 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { routes } from "../../../lib/routes";
 import Calendar from "../../calendar/Calendar";
-import { deleteTasks } from "../../../API/tasks";
+import { deleteTasks, editTasks } from "../../../API/tasks";
 import { useUser } from "../../../hooks/useUser";
 import { useTasks } from "../../../hooks/useTasks";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { statusData } from "../../../lib/statusData";
+import * as S from "./PopBrowse.styled";
 
 const PopBrowse = () => {
   const { id } = useParams();
   const { user } = useUser();
-  const { setTasks } = useTasks();
+  const { tasks, setTasks } = useTasks();
   const navigate = useNavigate();
   const [error, setError] = useState("");
+  const [selected, setSelected] = useState(null);
+  const [isEdit, setIsEdit] = useState(false);
+  const [formValue, setFormValue] = useState({
+    title: "",
+    description: "",
+    topic: "",
+    status: "",
+  });
+
+  useEffect(() => {
+    if (tasks.length) {
+      const task = tasks.find((t) => t._id === id);
+      if (!task) {
+        navigate(routes.BOARD);
+        return;
+      }
+      setFormValue({
+        title: task.title,
+        description: task.description,
+        topic: task.topic,
+        status: task.status,
+      });
+      setSelected(new Date(task.date));
+    }
+  }, [id, navigate, tasks]);
+
+  const editMode = () => {
+    setIsEdit((changeState) => !changeState);
+  };
+
+  function onChange(event) {
+    const { value, name } = event.target;
+    setFormValue({
+      ...formValue,
+      [name]: value,
+    });
+  }
+  function onClick(event) {
+    event.preventDefault();
+    if (
+      !formValue.title.trim() ||
+      !formValue.description.trim() ||
+      !formValue.topic.trim() ||
+      !formValue.status.trim() ||
+      !selected
+    ) {
+      setError("Нужно заполнить все поля.");
+      return;
+    }
+    editTasks({
+      token: user.token,
+      title: formValue.title,
+      description: formValue.description,
+      topic: formValue.topic,
+      status: formValue.status,
+      date: selected,
+      id,
+    })
+      .then((data) => {
+        setTasks(data.tasks);
+        setIsEdit(false);
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+  }
 
   function onDelete(event) {
     event.preventDefault();
@@ -21,42 +89,48 @@ const PopBrowse = () => {
     })
       .then((data) => {
         setTasks(data.tasks);
-        navigate(-1);
+        navigate(routes.BOARD);
       })
       .catch((error) => {
         setError(error.message);
       });
   }
   return (
-    <div className="pop-browse" id="popBrowse">
-      <div className="pop-browse__container">
-        <div className="pop-browse__block">
-          <div className="pop-browse__content">
-            <div className="pop-browse__top-block">
-              <h3 className="pop-browse__ttl">Название задачи {id}</h3>
-              <div className="categories__theme theme-top _orange _active-category">
-                <p className="_orange">Web Design</p>
-              </div>
-            </div>
+    <S.PopBrowse>
+      <S.PopBrowseContainer>
+        <S.PopBrowseBlock>
+          <S.PopBrowseContent>
+            <S.PopBrowseTopBlock>
+              <S.PopBrowseTitle>{formValue.title}</S.PopBrowseTitle>
+              <S.CategoriesTheme $isActive={true}>
+                <p>{formValue.topic}</p>
+              </S.CategoriesTheme>
+            </S.PopBrowseTopBlock>
             <div className="pop-browse__status status">
               <p className="status__p subttl">Статус</p>
-              <div className="status__themes">
-                <div className="status__theme _hide">
-                  <p>Без статуса</p>
+              {isEdit ? (
+                <div className="status__themes">
+                  {statusData.map((status, index) => (
+                    <label key={index}>
+                      <input
+                        type="radio"
+                        name="status"
+                        onChange={onChange}
+                        value={status}
+                      />
+                      <div className="status__theme">
+                        <p>{status}</p>
+                      </div>
+                    </label>
+                  ))}
                 </div>
-                <div className="status__theme _gray">
-                  <p className="_gray">Нужно сделать</p>
-                </div>
-                <div className="status__theme _hide">
-                  <p>В работе</p>
-                </div>
-                <div className="status__theme _hide">
-                  <p>Тестирование</p>
-                </div>
-                <div className="status__theme _hide">
-                  <p>Готово</p>
-                </div>
-              </div>
+              ) : (
+                <label>
+                  <div className="status__theme">
+                    <p>{formValue.status}</p>
+                  </div>
+                </label>
+              )}
             </div>
             <div className="pop-browse__wrap">
               <form
@@ -70,62 +144,75 @@ const PopBrowse = () => {
                   </label>
                   <textarea
                     className="form-browse__area"
-                    name="text"
+                    name="description"
                     id="textArea01"
-                    readOnly
+                    readOnly={!isEdit}
                     placeholder="Введите описание задачи..."
+                    onChange={onChange}
+                    value={formValue.description}
                   ></textarea>
                 </div>
               </form>
-              <Calendar />
+              <Calendar
+                selected={selected}
+                setSelected={setSelected}
+                disabled={!isEdit}
+              />
             </div>
-            <div className="theme-down__categories theme-down">
-              <p className="categories__p subttl">Категория</p>
-              <div className="categories__theme _orange _active-category">
-                <p className="_orange">Web Design</p>
-              </div>
-            </div>
-            <div className="pop-browse__btn-browse ">
-              <div className="btn-group">
-                <button className="btn-browse__edit _btn-bor _hover03">
-                  <a href="#">Редактировать задачу</a>
-                </button>
-                <button
-                  className="btn-browse__delete _btn-bor _hover03"
-                  onClick={onDelete}
-                >
-                  <a href="#">Удалить задачу</a>
-                </button>
-              </div>
-              <button className="btn-browse__close _btn-bg _hover01">
-                <Link to={routes.BOARD}>Закрыть</Link>
-              </button>
-            </div>
-            {error}
-            <div className="pop-browse__btn-edit _hide">
-              <div className="btn-group">
-                <button className="btn-edit__edit _btn-bg _hover01">
-                  <a href="#">Сохранить</a>
-                </button>
-                <button className="btn-edit__edit _btn-bor _hover03">
-                  <a href="#">Отменить</a>
-                </button>
-                <button
-                  className="btn-edit__delete _btn-bor _hover03"
-                  id="btnDelete"
-                >
-                  <a href="#">Удалить задачу</a>
+            {!isEdit ? (
+              <div className="pop-browse__btn-browse ">
+                <div className="btn-group">
+                  <button
+                    className="btn-browse__edit _btn-bor _hover03"
+                    onClick={editMode}
+                  >
+                    Редактировать задачу
+                  </button>
+                  <button
+                    className="btn-browse__delete _btn-bor _hover03"
+                    onClick={onDelete}
+                  >
+                    Удалить задачу
+                  </button>
+                </div>
+                <button className="btn-browse__close _btn-bg _hover01">
+                  <Link to={routes.BOARD}>Закрыть</Link>
                 </button>
               </div>
+            ) : (
+              <div className="pop-browse__btn-edit">
+                <div className="btn-group">
+                  <button
+                    className="btn-edit__edit _btn-bg _hover01"
+                    onClick={onClick}
+                  >
+                    Сохранить
+                  </button>
+                  <button
+                    className="btn-edit__edit _btn-bor _hover03"
+                    onClick={editMode}
+                  >
+                    Отменить
+                  </button>
+                  <button
+                    className="btn-edit__delete _btn-bor _hover03"
+                    id="btnDelete"
+                    onClick={onDelete}
+                  >
+                    Удалить задачу
+                  </button>
+                </div>
 
-              <button className="btn-edit__close _btn-bg _hover01">
-                <a href="#">Закрыть</a>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+                <button className="btn-browse__close _btn-bg _hover01">
+                  <Link to={routes.BOARD}>Закрыть</Link>
+                </button>
+              </div>
+            )}
+            {error}
+          </S.PopBrowseContent>
+        </S.PopBrowseBlock>
+      </S.PopBrowseContainer>
+    </S.PopBrowse>
   );
 };
 
