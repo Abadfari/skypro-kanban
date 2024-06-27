@@ -1,4 +1,4 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { routes } from "../../../lib/routes";
 import Calendar from "../../calendar/Calendar";
 import { deleteTasks, editTasks } from "../../../API/tasks";
@@ -7,6 +7,8 @@ import { useTasks } from "../../../hooks/useTasks";
 import { useEffect, useState } from "react";
 import { statusData } from "../../../lib/statusData";
 import * as S from "./PopBrowse.styled";
+import * as Shared from "../../../shared/Shared.styled.js";
+import { topicData } from "../../../lib/cardData.js";
 
 const PopBrowse = () => {
   const { id } = useParams();
@@ -102,111 +104,89 @@ const PopBrowse = () => {
           <S.PopBrowseContent>
             <S.PopBrowseTopBlock>
               <S.PopBrowseTitle>{formValue.title}</S.PopBrowseTitle>
-              <S.CategoriesTheme $isActive={true}>
+              <S.CategoriesTheme
+                $isActive={true}
+                $color={topicData[formValue.topic]}
+              >
                 <p>{formValue.topic}</p>
               </S.CategoriesTheme>
             </S.PopBrowseTopBlock>
-            <div className="pop-browse__status status">
-              <p className="status__p subttl">Статус</p>
+            <S.Status>
+              <S.StatusTittle>Статус</S.StatusTittle>
               {isEdit ? (
-                <div className="status__themes">
+                <S.StatusThemes>
                   {statusData.map((status, index) => (
-                    <label key={index}>
-                      <input
+                    <S.StatusLabel key={index}>
+                      <S.RadioInput
                         type="radio"
                         name="status"
                         onChange={onChange}
                         value={status}
                       />
-                      <div className="status__theme">
+                      <S.StatusTheme $active={formValue.status === status}>
                         <p>{status}</p>
-                      </div>
-                    </label>
+                      </S.StatusTheme>
+                    </S.StatusLabel>
                   ))}
-                </div>
+                </S.StatusThemes>
               ) : (
-                <label>
-                  <div className="status__theme">
+                <S.StatusLabel>
+                  <S.StatusTheme $active={true}>
                     <p>{formValue.status}</p>
-                  </div>
-                </label>
+                  </S.StatusTheme>
+                </S.StatusLabel>
               )}
-            </div>
-            <div className="pop-browse__wrap">
-              <form
-                className="pop-browse__form form-browse"
-                id="formBrowseCard"
-                action="#"
-              >
-                <div className="form-browse__block">
-                  <label htmlFor="textArea01" className="subttl">
+            </S.Status>
+            <S.PopBrowseWrap>
+              <S.PopBrowseForm id="formBrowseCard" action="#">
+                <S.FormBrowseBlock>
+                  <Shared.Subttl htmlFor="textArea01">
                     Описание задачи
-                  </label>
-                  <textarea
-                    className="form-browse__area"
+                  </Shared.Subttl>
+                  <S.FormBrowseArea
                     name="description"
                     id="textArea01"
                     readOnly={!isEdit}
                     placeholder="Введите описание задачи..."
                     onChange={onChange}
                     value={formValue.description}
-                  ></textarea>
-                </div>
-              </form>
+                  ></S.FormBrowseArea>
+                </S.FormBrowseBlock>
+              </S.PopBrowseForm>
               <Calendar
                 selected={selected}
                 setSelected={setSelected}
                 disabled={!isEdit}
               />
-            </div>
+            </S.PopBrowseWrap>
             {!isEdit ? (
-              <div className="pop-browse__btn-browse ">
-                <div className="btn-group">
-                  <button
-                    className="btn-browse__edit _btn-bor _hover03"
-                    onClick={editMode}
-                  >
+              <S.PopBrowseButtonBrowse>
+                <S.ButtonGroup>
+                  <S.ButtonBorder onClick={editMode}>
                     Редактировать задачу
-                  </button>
-                  <button
-                    className="btn-browse__delete _btn-bor _hover03"
-                    onClick={onDelete}
-                  >
+                  </S.ButtonBorder>
+                  <S.ButtonBorder onClick={onDelete}>
                     Удалить задачу
-                  </button>
-                </div>
-                <button className="btn-browse__close _btn-bg _hover01">
-                  <Link to={routes.BOARD}>Закрыть</Link>
-                </button>
-              </div>
+                  </S.ButtonBorder>
+                </S.ButtonGroup>
+                <S.ButtonClose>
+                  <S.StyledLink to={routes.BOARD}>Закрыть</S.StyledLink>
+                </S.ButtonClose>
+              </S.PopBrowseButtonBrowse>
             ) : (
-              <div className="pop-browse__btn-edit">
-                <div className="btn-group">
-                  <button
-                    className="btn-edit__edit _btn-bg _hover01"
-                    onClick={onClick}
-                  >
-                    Сохранить
-                  </button>
-                  <button
-                    className="btn-edit__edit _btn-bor _hover03"
-                    onClick={editMode}
-                  >
-                    Отменить
-                  </button>
-                  <button
-                    className="btn-edit__delete _btn-bor _hover03"
-                    id="btnDelete"
-                    onClick={onDelete}
-                  >
+              <S.PopBrowseButtonEdit>
+                <S.ButtonGroup>
+                  <S.ButtonClose onClick={onClick}>Сохранить</S.ButtonClose>
+                  <S.ButtonBorder onClick={editMode}>Отменить</S.ButtonBorder>
+                  <S.ButtonBorder id="btnDelete" onClick={onDelete}>
                     Удалить задачу
-                  </button>
-                </div>
+                  </S.ButtonBorder>
+                </S.ButtonGroup>
 
-                <button className="btn-browse__close _btn-bg _hover01">
-                  <Link to={routes.BOARD}>Закрыть</Link>
-                </button>
-              </div>
+                <S.ButtonClose>
+                  <S.StyledLink to={routes.BOARD}>Закрыть</S.StyledLink>
+                </S.ButtonClose>
+              </S.PopBrowseButtonEdit>
             )}
             {error}
           </S.PopBrowseContent>
