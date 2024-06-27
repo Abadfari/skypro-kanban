@@ -49,7 +49,13 @@ const Card = ({ title, date, topic, id }) => {
                 </path>
               </defs>
             </svg>
-            <p>{date}</p>
+            <p>
+              {date.toLocaleDateString("ru-RU", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "2-digit",
+              })}
+            </p>
           </S.CardDate>
         </S.CardContent>
       </S.Card>

@@ -12,7 +12,7 @@ const Column = ({ title, tasks }) => {
           <Card
             key={index}
             title={task.title}
-            date={task.date}
+            date={new Date(task.date)}
             topic={task.topic}
             id={task._id}
           />

@@ -2,7 +2,7 @@ import "react-day-picker/dist/style.css";
 import { StyledDayPicker } from "./Calendar.styled";
 import { ru } from "date-fns/locale";
 
-export function Calendar({ selected, setSelected }) {
+export function Calendar({ selected, setSelected, disabled }) {
   let footer;
   if (selected) {
     footer = `Срок исполнения: ${selected.toLocaleDateString()}`;
@@ -16,6 +16,7 @@ export function Calendar({ selected, setSelected }) {
       mode="single"
       selected={selected}
       onSelect={setSelected}
+      disabled={disabled}
     />
   );
 }
